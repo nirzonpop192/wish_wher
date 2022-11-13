@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "214225065917",
+    "project_id": "wishwisher-a2b69",
+    "storage_bucket": "wishwisher-a2b69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214225065917:android:e7026b37dc7c46bb6324d4",
+        "android_client_info": {
+          "package_name": "com.birthdayreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214225065917-8v6qgi5haee5jjpooetsp7io28jho20t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv7sBaApKq6S8CxKgpIXmA73NUEG9HiRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214225065917-8v6qgi5haee5jjpooetsp7io28jho20t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214225065917:android:e2da19f2aa6cb2506324d4",
+        "android_client_info": {
+          "package_name": "com.wishwisher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214225065917-8v6qgi5haee5jjpooetsp7io28jho20t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv7sBaApKq6S8CxKgpIXmA73NUEG9HiRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214225065917-8v6qgi5haee5jjpooetsp7io28jho20t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

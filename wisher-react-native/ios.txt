@@ -1,0 +1,5 @@
+Go into your MyReactProject/ios dir and open MyProject.xcworkspace workspace. Select the top project "MyProject" and select the "Signing & Capabilities" tab. Add a 2 new Capabilities using "+" button:
+
+Background Mode capability and tick Remote Notifications.
+Push Notifications capability
+

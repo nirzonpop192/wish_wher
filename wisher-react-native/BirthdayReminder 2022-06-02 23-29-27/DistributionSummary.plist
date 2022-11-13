@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BirthdayReminder.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>33D671F41ED15CF7D44D6D40D176A1D8B8672645</string>
+				<key>dateExpires</key>
+				<string>16/12/22</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>33D671F41ED15CF7D44D6D40D176A1D8B8672645</string>
+						<key>dateExpires</key>
+						<string>16/12/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>OpenSSL.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>7D3QP2WPY3</string>
+						<key>name</key>
+						<string>Esther Oni</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.1.180</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>7D3QP2WPY3.com.wishwisher.app</string>
+				<key>aps-environment</key>
+				<string>development</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>7D3QP2WPY3</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>BirthdayReminder.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>7270989e-f4cf-4d6d-8b50-18087ca3282f</string>
+				<key>dateExpires</key>
+				<string>31/05/23</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.wishwisher.app</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>7D3QP2WPY3</string>
+				<key>name</key>
+				<string>Esther Oni</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>

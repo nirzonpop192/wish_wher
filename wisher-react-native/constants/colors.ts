@@ -1,0 +1,15 @@
+export default {
+    globalBg: "#e3f2fd",
+    black: "#191919",
+    white: "#ffffff",
+    offWhite: "#e6e6e6",
+    orange: "#FBA928",
+    orangeDarker: "#EB9918",
+    lightGrey: "#939AA4",
+    lighterGrey: "#CDD4DA",
+    angry: "#dd3333",
+    yellow: '#FCB658',
+    green: '#40C672',
+    primary: '#2596be',
+    secondry: '#E8EFF5',
+}
