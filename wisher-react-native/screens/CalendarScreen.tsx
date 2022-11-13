@@ -237,16 +237,23 @@ const CalendarScreen = (props: CalendarScreenProps) => {
           )
       }
 
-      <View style={{ marginTop: 20 }}>
-        {
-          listDates.forEach(
-            (val: string) => {
-              { console.log("val ", val) }
-              <Text style={{ marginTop: 20, color: '#000' }}>{val}</Text>
-            }
-          )
-        }
-      </View>
+
+      <FlatList
+        data={data[selectedDate] || []}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={renderItemHandler}
+        contentContainerStyle={{
+          paddingBottom: 20,
+          minHeight: "50%",
+        }}
+        onEndReachedThreshold={0.01}
+        // onRefresh={getUserGoalsHandler.bind(null, true)}
+        // refreshing={isRefreshing}
+        ListHeaderComponent={renderListHeader}
+        stickyHeaderIndices={[0]}
+      />
+
+
 
     </Root>
   )
