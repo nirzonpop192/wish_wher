@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { Reminder } from "../types";
 import { convertAPIToCalendarFormat, convertUnixDateToAPIFormat } from "../utils/MiscUtils";
 import ListItem from "../components/ListItem";
+import { useIsFocused } from '@react-navigation/native';
 
 type CalendarScreenProps = {
   route: any
@@ -22,6 +23,7 @@ const anniversary = { key: 'anniversary', color: 'pink', selectedColor: colors.p
 
 const CalendarScreen = (props: CalendarScreenProps) => {
   const { navigation } = props
+  const isFocused = useIsFocused();
 
   const allData = useSelector((state: any) => state.reminders.allData)
 
@@ -30,7 +32,8 @@ const CalendarScreen = (props: CalendarScreenProps) => {
   const [selectedDate, setSelectedDate] = useState('')
   // const [listData, setListData] = useState()
   const [listDates, setListDates] = useState<any>([])
-
+  const [showWholeMonth, setShowWholeMonth] = useState(true)
+  var sortedDated: any[] = []
   const editReminderHandler = useCallback((reminderData: any) => {
     navigation.navigate('addReminder', {
       reminderData
@@ -38,57 +41,110 @@ const CalendarScreen = (props: CalendarScreenProps) => {
   }, [navigation])
 
   useEffect(() => {
-    const datesData: any = {}
-    const currDate = new Date().getTime()
-    const currApiDate = convertAPIToCalendarFormat(convertUnixDateToAPIFormat(currDate))
-    setSelectedDate(currApiDate)
-    const convertedData = allData.reduce((accumulator: any, succedor: Reminder) => {
-      const convertedDate = convertAPIToCalendarFormat(succedor.event_date)
-      if (!accumulator[convertedDate]) {
-        const filteredReminders = allData.filter((reminder: Reminder) => reminder.event_date === succedor.event_date)
+    if (isFocused) {
+      const datesData: any = {}
+      const currDate = new Date().getTime()
+      const currApiDate = convertAPIToCalendarFormat(convertUnixDateToAPIFormat(currDate))
+      setSelectedDate(currApiDate)
+      const convertedData = allData.reduce((accumulator: any, succedor: Reminder) => {
+        const convertedDate = convertAPIToCalendarFormat(succedor.event_date)
+        if (!accumulator[convertedDate]) {
+          const filteredReminders = allData.filter((reminder: Reminder) => reminder.event_date === succedor.event_date)
 
-        const isHavingBday = filteredReminders.some((reminder: Reminder) => reminder.event_type.toLowerCase() === 'bir')
-        const isHavingAnni = filteredReminders.some((reminder: Reminder) => reminder.event_type.toLowerCase() === 'anni')
+          const isHavingBday = filteredReminders.some((reminder: Reminder) => reminder.event_type.toLowerCase() === 'bir')
+          const isHavingAnni = filteredReminders.some((reminder: Reminder) => reminder.event_type.toLowerCase() === 'anni')
 
-        let eventsArr: { key: string; color: string; selectedColor: string; selectedTextColor: string; }[] = []
+          let eventsArr: { key: string; color: string; selectedColor: string; selectedTextColor: string; }[] = []
 
-        if (isHavingAnni || isHavingBday) {
-          if (isHavingAnni && isHavingBday) {
-            eventsArr = [
-              bday,
-              anniversary
-            ]
-          } else if (isHavingBday) {
-            eventsArr = [
-              anniversary
-            ]
-          } else if (isHavingAnni) {
-            eventsArr = [
-              anniversary
-            ]
+          if (isHavingAnni || isHavingBday) {
+            if (isHavingAnni && isHavingBday) {
+              eventsArr = [
+                bday,
+                anniversary
+              ]
+            } else if (isHavingBday) {
+              eventsArr = [
+                anniversary
+              ]
+            } else if (isHavingAnni) {
+              eventsArr = [
+                anniversary
+              ]
+            }
+          }
+
+          datesData[convertedDate] = filteredReminders
+
+
+          if (convertedDate !== "Invalid date") {
+            accumulator[convertedDate] = {
+              dots: eventsArr,
+              selected: currApiDate === convertedDate
+            }
           }
         }
 
-        console.log("filteredReminders ", filteredReminders)
-        console.log("convertedDate ", datesData)
-        datesData[convertedDate] = filteredReminders
+        return accumulator
+      }, {})
+
+      setCalendarData(convertedData)
+      setData(datesData)
 
 
-        if (convertedDate !== "Invalid date") {
-          accumulator[convertedDate] = {
-            dots: eventsArr,
-            selected: currApiDate === convertedDate
-          }
+
+
+      // setListDates(Object.keys(datesData))
+
+      // console.log("====================================================================================11111");
+      // console.log(listDates);
+
+
+      let _listDates: any = [];
+      Object.keys(datesData).forEach((e: any) => {
+
+
+        let date1 = new Date(e).getMonth();
+        let date2 = new Date(currDate).getMonth();
+
+
+        if (date1 == date2) {
+          _listDates.push(e);
         }
-      }
+      });
 
-      return accumulator
-    }, {})
 
-    setCalendarData(convertedData)
-    setData(datesData)
-    setListDates(Object.keys(datesData))
-  }, [allData])
+      // console.log("====================================================================================2222");
+      // console.log('_listDates', _listDates);
+
+      setListDates(_listDates)
+
+      /*
+      listDates.map(
+        (val: string) => {
+          let date1 = new Date(val).getMonth();
+          let date2 = new Date(currDate).getMonth();
+
+
+          //console.log("nirzon-- date1:" + date1)
+          //console.log("nirzon-- date2:" + date2)
+          if (date1 === date2) {
+            sortedDated.push("\"" + val + "\"");
+
+          } else {
+            delete listDates["\"" + val + "\""];
+          }
+        })
+       */
+
+      //console.log("nirzon-- sortedDated: " + "[" + sortedDated + "]")
+      //console.log("nirzon-- datesData:" + Object.keys(datesData))
+      //  setListDates("[" + sortedDated + "]")
+      // setListDates(Object.keys(datesData))
+      //console.log("nirzon-- listDates:" + listDates)
+      setShowWholeMonth(true)
+    }
+
+  }, [allData, isFocused])
 
   const shareCardHandler = useCallback((cardDetails: any) => {
     navigation.navigate('shareCard', {
@@ -139,6 +195,7 @@ const CalendarScreen = (props: CalendarScreenProps) => {
   }, [selectedDate])
 
   console.log("listDates ", listDates)
+  console.log("showwholemonth ", showWholeMonth)
 
   return (
     <Root style={styles.container}>
@@ -160,13 +217,36 @@ const CalendarScreen = (props: CalendarScreenProps) => {
                 const { dateString } = day
                 console.log(dateString)
                 setSelectedDate(dateString)
+                setShowWholeMonth(false)
               }}
               // Handler which gets executed on day long press. Default = undefined
               onDayLongPress={(day) => { console.log('selected day', day) }}
               // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
               // monthFormat={'yyyy MM'}
               // Handler which gets executed when visible month changes in calendar. Default = undefined
-              onMonthChange={(month) => { console.log('month changed', month) }}
+              onMonthChange={(month) => {
+                console.log('month changed', month)
+                let _listDates: any = [];
+                Object.keys(data).forEach((e: any) => {
+
+
+                  let date1 = new Date(e).getMonth();
+                  let date2 = new Date(month["dateString"]).getMonth();
+
+
+                  if (date1 == date2) {
+                    _listDates.push(e);
+                  }
+                });
+
+
+                // console.log("====================================================================================2222");
+                // console.log('_listDates', _listDates);
+
+                setListDates(_listDates)
+
+
+              }}
               // Hide month navigation arrows. Default = false
               // hideArrows={true}
               // Replace default arrows with custom ones (direction can be 'left' or 'right')
@@ -237,24 +317,44 @@ const CalendarScreen = (props: CalendarScreenProps) => {
           )
       }
 
+      {
+        showWholeMonth ?
+          listDates.map(
+            (val: string) => {
+              return (
+                <FlatList
+                  data={data[val] || []}
+                  keyExtractor={(_, index) => index.toString()}
+                  renderItem={renderItemHandler}
+                  contentContainerStyle={{
+                    paddingBottom: 2,
+                    minHeight: "50%",
+                  }}
+                  onEndReachedThreshold={0.01}
+                  // onRefresh={getUserGoalsHandler.bind(null, true)}
+                  // refreshing={isRefreshing}
+                  stickyHeaderIndices={[0]}
 
-      <FlatList
-        data={data[selectedDate] || []}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={renderItemHandler}
-        contentContainerStyle={{
-          paddingBottom: 20,
-          minHeight: "50%",
-        }}
-        onEndReachedThreshold={0.01}
-        // onRefresh={getUserGoalsHandler.bind(null, true)}
-        // refreshing={isRefreshing}
-        ListHeaderComponent={renderListHeader}
-        stickyHeaderIndices={[0]}
-      />
-
-
-
+                />
+              )
+            }
+          )
+          :
+          <FlatList
+            data={data[selectedDate] || []}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={renderItemHandler}
+            contentContainerStyle={{
+              paddingBottom: 20,
+              minHeight: "50%",
+            }}
+            onEndReachedThreshold={0.01}
+            // onRefresh={getUserGoalsHandler.bind(null, true)}
+            // refreshing={isRefreshing}
+            ListHeaderComponent={renderListHeader}
+            stickyHeaderIndices={[0]}
+          />
+      }
     </Root>
   )
 }

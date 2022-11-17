@@ -12,7 +12,7 @@ type TimeZonePickerProps = {
 
 const TimeZonePicker = forwardRef((props: TimeZonePickerProps, ref) => {
     const { onSelect } = props
-    
+
     const [isVisible, setVisible] = useState(false)
 
     const toggleVisibility = useCallback(() => {
@@ -25,8 +25,8 @@ const TimeZonePicker = forwardRef((props: TimeZonePickerProps, ref) => {
             toggleVisibility
         }
     }, [])
-    
-    useImperativeHandle(ref, returnVals, [isVisible,toggleVisibility])
+
+    useImperativeHandle(ref, returnVals, [isVisible, toggleVisibility])
 
     const keyExtractorHandler = useCallback((_item, index) => {
         return index
@@ -44,7 +44,7 @@ const TimeZonePicker = forwardRef((props: TimeZonePickerProps, ref) => {
                     <BoldText>{item}</BoldText>
                 </Pressable>
             )
-        } catch(err: any) {
+        } catch (err: any) {
             console.log('[renderTimezonesHandler] Error : ', err.message)
             return null
         }
@@ -88,5 +88,5 @@ const styles = StyleSheet.create({
     }
 })
 
-export default  TimeZonePicker
+export default TimeZonePicker
 

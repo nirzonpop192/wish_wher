@@ -52,7 +52,7 @@ const ListItem = (props: ListItemProps) => {
       <Pressable
         onPress={onPress}
         style={styles.editBtn}>
-        <BoldText>{"Edit"}</BoldText>
+        <BoldText>{"EDIT"}</BoldText>
       </Pressable>
     </Pressable>
   )

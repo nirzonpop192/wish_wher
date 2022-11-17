@@ -91,7 +91,7 @@ function SignupScreen(props: SignupScreenProps) {
   const [password, setPassword] = useState('')
   const [confPassword, setConfPassword] = useState('')
   const [waNumber, setWANumber] = useState('')
-  const [timezone, setTimezone] = useState('')
+  const [timezone, setTimezone] = useState(RNLocalize.getTimeZone())
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -240,6 +240,8 @@ function SignupScreen(props: SignupScreenProps) {
     }
   }, [])
 
+
+
   const onTimezoneChooseHandler = useCallback(() => {
     console.log("nir_timezone" + RNLocalize.getTimeZone())
     try {
@@ -248,6 +250,16 @@ function SignupScreen(props: SignupScreenProps) {
       SomethingWentWrongToast()
     }
   }, [])
+
+  const onAutoTimezoneChooseHandler = useCallback(() => {
+    console.log("nir_timezone" + RNLocalize.getTimeZone())
+    try {
+      setTimezone(RNLocalize.getTimeZone())
+    } catch (err: any) {
+      SomethingWentWrongToast()
+    }
+  }, [])
+
 
   return (
     <RootComponent style={ROOT}>
@@ -305,9 +317,9 @@ function SignupScreen(props: SignupScreenProps) {
                 placeholder={"Phone Number"}
                 onSubmitEditing={onSubmitTextHandler.bind(null, PHONE_NUMBER)}
               />
+
               <Pressable
-                onPress={onTimezoneChooseHandler}
-              >
+                onPress={onTimezoneChooseHandler}>
                 <RoundedImageInput
                   // ref={null}
                   logo={images.ic_clock}
@@ -317,6 +329,12 @@ function SignupScreen(props: SignupScreenProps) {
                   editable={false}
                 />
               </Pressable>
+
+
+
+
+
+
               <RoundedPasswordInput
                 ref={passwordRef}
                 logo={images.ic_password}
