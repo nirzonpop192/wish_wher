@@ -198,6 +198,8 @@ const ShareCardScreen = (props: ShareCardScreenProps) => {
     })
   }, [navigation, shareHandler])
 
+  console.log(url);
+
 
   return (
     <Root unsafe style={styles.container}>

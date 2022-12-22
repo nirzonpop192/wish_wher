@@ -20,6 +20,7 @@ import { premium8 } from "./premium8"
 import { premium9 } from "./premium9"
 import { premium10 } from "./premium10"
 import { premium11 } from "./premium11"
+import { premium12 } from "./premium12"
 
 
 export {
@@ -44,6 +45,7 @@ export {
     premium8,
     premium9,
     premium10,
-    premium11
+    premium11,
+    premium12
 
 }

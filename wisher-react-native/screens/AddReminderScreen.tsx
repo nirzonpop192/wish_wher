@@ -501,7 +501,7 @@ function AddReminderScreen(props: AddReminderScreenProps) {
             } else {
               Alert.alert(
                 "Alert",
-                "You need at-least 10 Points to select a Premium Card. To get Points Watch Ad now",
+                "Watch Ad to use this card",
                 [
                   {
                     text: "Cancel",

@@ -22,26 +22,26 @@ function RootWithoutScoll(props: RootProps) {
         backgroundColor: colors.globalBg,
       }}
     >
-        <TouchableWithoutFeedback
-          onPress={Keyboard.dismiss}
-          style={{ flexGrow: 1 }}
+      <TouchableWithoutFeedback
+        onPress={Keyboard.dismiss}
+        style={{ flexGrow: 1 }}
+      >
+        <View
+          collapsable={false}
+          style={{
+            flexGrow: 1,
+            backgroundColor: colors.secondry,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            paddingVertical: 5,
+            paddingHorizontal: 10,
+            height: '100%',
+            ...style
+          }}
         >
-          <View
-            collapsable={false}
-            style={{
-              flexGrow: 1,
-              backgroundColor: colors.secondry,
-              borderTopLeftRadius: 30,
-              borderTopRightRadius: 30,
-              paddingVertical: 5,
-              paddingHorizontal: 10,
-              height: '100%',
-              ...style
-            }}
-          >
-            {children}
-          </View>
-        </TouchableWithoutFeedback>
+          {children}
+        </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   )
 }

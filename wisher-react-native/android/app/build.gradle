@@ -136,8 +136,8 @@ android {
         applicationId "com.wishwisher"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "1.1"
+        versionCode 7
+        versionName "1.2"
 
         configurations.all {
             resolutionStrategy { force 'androidx.work:work-runtime:2.6.0' }
